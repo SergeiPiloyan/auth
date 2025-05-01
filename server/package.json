@@ -16,17 +16,24 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "5.0.1",
+    "@types/md5": "^2.3.5",
     "@types/node": "22.15.3",
     "compression": "1.8.0",
     "cors": "2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "md5-typescript": "^1.0.5",
+    "node-cache": "^5.1.2",
     "nodemon": "3.1.10",
+    "pg": "^8.15.6",
+    "pg-escape": "^0.2.0",
     "ts-node": "10.9.2",
     "typescript": "5.8.3"
   },
   "devDependencies": {
     "@types/compression": "1.7.5",
-    "@types/cors": "2.8.17"
+    "@types/cors": "2.8.17",
+    "@types/pg": "^8.11.14",
+    "@types/pg-escape": "^0.2.3"
   }
 }
