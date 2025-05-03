@@ -1,17 +1,19 @@
-import Router from "express";
-import { Request, Response } from "express";
-import { Controllers } from "./controllers";
+import Router from 'express';
+import { Request, Response } from 'express';
+import { Controllers } from './controllers';
 
 const apiRouter = () => {
-  const router = Router();
+    const router = Router();
 
-  router.get("/health", (req: Request, res: Response) => {
-    res.send("Server is working");
-  });
+    router.get('/health', (req: Request, res: Response) => {
+        res.send('Server is working');
+    });
 
-  router.post("/auth", Controllers.handleAuth);
+    router.post('/auth', Controllers.handleAuth);
 
-  return router;
+    router.post('/logout', Controllers.logout);
+
+    return router;
 };
 
 export default apiRouter();

@@ -30,4 +30,12 @@ export class Service {
             return await Service.successAuth(user.user_id);
         }
     };
+
+    public static logout = async (cookieToken: string) => {
+        await DB.execChange(`
+            UPDATE users_auth_tokens
+            SET is_active = false
+            WHERE token = ${pgs(cookieToken)}
+        `);
+    };
 }

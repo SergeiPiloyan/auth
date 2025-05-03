@@ -16,6 +16,13 @@ export class Controllers {
         Controllers.sendJSON(res, processedAuth);
     }
 
+    public static async logout(req: Request, res: Response) {
+        const { token }: { token: string } = req.body;
+
+        await Service.logout(token);
+        Controllers.sendJSON(res, this.logout);
+    }
+
     private static sendJSON(res: Response, json: any = undefined, cacheAge: number = 0) {
         res.setHeader('Cache-Control', `public, max-age=${cacheAge}`);
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
