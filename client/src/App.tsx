@@ -1,19 +1,13 @@
-import { Login } from './pages/Login.tsx';
-import { Home } from './pages/Home.tsx';
 import { AuthProvider } from './auth.tsx';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { RouterPages } from './RouterPages.tsx';
 
-function App() {
+export const App = () => {
     return (
         <BrowserRouter>
             <AuthProvider>
-                <Routes>
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/' element={<Home />} />
-                </Routes>
+                <RouterPages />
             </AuthProvider>
         </BrowserRouter>
     );
-}
-
-export default App;
+};
