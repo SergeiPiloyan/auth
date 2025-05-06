@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from './auth';
-import { Login } from './pages/Login';
+import { Auth } from './pages/Auth';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
+import { useAuth } from './auth';
 
 export const RouterPages = () => {
     const { checkAuth, isAuthChecked } = useAuth();
@@ -17,7 +17,7 @@ export const RouterPages = () => {
         };
 
         check();
-    }, [checkAuth, isAuthChecked]);
+    }, []);
 
     if (loading) {
         return <div>LOADING...</div>;
@@ -25,7 +25,8 @@ export const RouterPages = () => {
 
     return (
         <Routes>
-            <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<Auth isLogin={true} />} />
+            <Route path='/registration' element={<Auth isLogin={false} />} />
             <Route path='/' element={<Home />} />
         </Routes>
     );

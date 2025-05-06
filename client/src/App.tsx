@@ -1,4 +1,4 @@
-import { AuthProvider } from './auth.tsx';
+import { AuthProvider } from './auth';
 import { BrowserRouter } from 'react-router-dom';
 import { RouterPages } from './RouterPages.tsx';
 
