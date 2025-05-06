@@ -17,7 +17,32 @@ export class Service {
         };
     };
 
-    public static handleAuth = async (userName, password) => {
+    public static registration = async (userName: string, password: string) => {
+        const user = (
+            await DB.execSelect(`
+            SELECT user_id, password
+            FROM users
+            WHERE lower(user_name) = lower(${pgs(userName)})
+        `)
+        ).rows[0];
+
+        if (user) {
+            return {
+                message: 'User is excited',
+            };
+        } else {
+            await DB.execSelect(`
+                INSERT INTO users (user_name, password)
+                VALUES (${pgs(userName)}, ${pgs(password)})
+            `);
+
+            return {
+                message: 'Registration was successful',
+            };
+        }
+    };
+
+    public static handleAuth = async (userName: string, password: string) => {
         const user = (
             await DB.execSelect(`
             SELECT user_id, password
@@ -29,6 +54,10 @@ export class Service {
         if (String(user?.password) === password) {
             return await Service.successAuth(user.user_id);
         }
+
+        return {
+            message: 'Wrong username or password',
+        };
     };
 
     public static logout = async (cookieToken: string) => {

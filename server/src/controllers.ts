@@ -16,6 +16,20 @@ export class Controllers {
         Controllers.sendJSON(res, processedAuth);
     }
 
+    public static async registration(req: Request, res: Response) {
+        const { user_name, password }: { user_name: string; password: string } = req.body;
+
+        if (!user_name || !password) {
+            res.status(400).json({ errorCode: 400, error_message: 'Wrong credentials' });
+        }
+
+        const trimmedUserName = user_name?.trim();
+        const trimmedPassword = password?.trim();
+
+        const processedAuth = await Service.registration(trimmedUserName, trimmedPassword);
+        Controllers.sendJSON(res, processedAuth);
+    }
+
     public static async logout(req: Request, res: Response) {
         const { token }: { token: string } = req.body;
 
