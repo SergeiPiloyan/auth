@@ -10,6 +10,7 @@ type TAuthContext = {
     checkAuth: (forceCheck?: boolean) => Promise<void>;
     login: (data: { user_name: string; password: string }) => Promise<void>;
     logout: () => Promise<void>;
+    registration: (data: { user_name: string; password: string }) => Promise<void>;
 };
 
 const AuthContext = createContext<TAuthContext>({} as TAuthContext);
@@ -27,7 +28,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
             if (token) {
                 setIsAuth(true);
-                if (window.location.pathname === '/login') {
+                if (
+                    window.location.pathname === '/login' ||
+                    window.location.pathname === '/registration'
+                ) {
                     navigate('/');
                 }
                 navigate(window.location.pathname);
@@ -41,6 +45,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const login = async (values: { user_name: string; password: string }) => {
         const data = await apiPostReq('auth', values);
+
+        if (data.cookieToken) {
+            Cookies.set(COOKIE_TOKEN, data.cookieToken, { expires: 9999 });
+            await checkAuth(true);
+        }
+    };
+
+    const registration = async (values: { user_name: string; password: string }) => {
+        const data = await apiPostReq('registration', values);
 
         if (data.cookieToken) {
             Cookies.set(COOKIE_TOKEN, data.cookieToken, { expires: 9999 });
@@ -67,6 +80,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 checkAuth,
                 login,
                 logout,
+                registration,
             }}
         >
             {children}
