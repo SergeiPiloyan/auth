@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Service } from './services';
+import { Service } from '../services/services';
 
 export class Controllers {
     public static async handleAuth(req: Request, res: Response) {

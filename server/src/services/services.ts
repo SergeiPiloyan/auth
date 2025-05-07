@@ -1,5 +1,5 @@
-import { DB } from './DB';
-import { pgs } from './utils';
+import { DB } from '../database/DB';
+import { pgs } from '../helpers/utils';
 
 export class Service {
     private static successAuth = async (user_id: number) => {

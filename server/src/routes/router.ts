@@ -1,6 +1,6 @@
 import Router from 'express';
 import { Request, Response } from 'express';
-import { Controllers } from './controllers';
+import { Controllers } from '../controllers/controllers';
 
 const apiRouter = () => {
     const router = Router();
