@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = async (values: { user_name: string; password: string }) => {
         const data = await apiPostReq('auth', values);
 
-        if (data.cookieToken) {
+        if (data && data.cookieToken) {
             Cookies.set(COOKIE_TOKEN, data.cookieToken, { expires: 9999 });
             await checkAuth(true);
         }
@@ -43,7 +43,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const registration = async (values: { user_name: string; password: string }) => {
         const data = await apiPostReq('registration', values);
 
-        alert(data.message);
+        if (data && data.message) {
+            alert(data.message);
+        }
     };
 
     const logout = async () => {
