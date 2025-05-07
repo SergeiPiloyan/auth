@@ -34,7 +34,7 @@ export class Controllers {
         const { token }: { token: string } = req.body;
 
         await Service.logout(token);
-        Controllers.sendJSON(res, this.logout);
+        Controllers.sendJSON(res);
     }
 
     private static sendJSON(res: Response, json: any = undefined, cacheAge: number = 0) {
