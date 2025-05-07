@@ -11,24 +11,21 @@ export const Auth = (props: { isLogin: boolean }) => {
     const { isLogin } = props;
 
     const navigate = useNavigate();
+    const { login, registration } = useAuth();
+    const form = useForm({ defaultValues: { user_name: '', password: '' } });
+
+    const { handleSubmit } = form;
 
     const handleRegisterRedirect = () => {
         navigate(isLogin ? '/registration' : '/login');
     };
-
-    const form = useForm({
-        defaultValues: { user_name: '', password: '' },
-    });
-
-    const { login, registration } = useAuth();
-
-    const { handleSubmit } = form;
 
     const onSubmit: SubmitHandler<TInputs> = async (data) => {
         if (isLogin) {
             await login(data);
         } else {
             await registration(data);
+            form.reset();
         }
     };
 
