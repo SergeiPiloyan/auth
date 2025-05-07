@@ -1,6 +1,6 @@
 import { AuthProvider } from './auth/AuthProvider.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import { RouterPages } from './RouterPages.tsx';
+import { RouterPages } from './router/RouterPages.tsx';
 
 export const App = () => {
     return (
