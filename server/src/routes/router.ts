@@ -13,7 +13,7 @@ const apiRouter = () => {
 
     router.post('/logout', Controllers.logout);
 
-    router.post('/registration', Controllers.registration);
+    router.post('/registration', Controllers.handleAuth);
 
     return router;
 };

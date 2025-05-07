@@ -12,21 +12,14 @@ export class Controllers {
         const trimmedUserName = user_name?.trim();
         const trimmedPassword = password?.trim();
 
-        const processedAuth = await Service.handleAuth(trimmedUserName, trimmedPassword);
-        Controllers.sendJSON(res, processedAuth);
-    }
+        let processedAuth;
 
-    public static async registration(req: Request, res: Response) {
-        const { user_name, password }: { user_name: string; password: string } = req.body;
-
-        if (!user_name || !password) {
-            res.status(400).json({ errorCode: 400, error_message: 'Wrong credentials' });
+        if (req.path === '/auth') {
+            processedAuth = await Service.handleAuth(trimmedUserName, trimmedPassword);
+        } else {
+            processedAuth = await Service.registration(trimmedUserName, trimmedPassword);
         }
 
-        const trimmedUserName = user_name?.trim();
-        const trimmedPassword = password?.trim();
-
-        const processedAuth = await Service.registration(trimmedUserName, trimmedPassword);
         Controllers.sendJSON(res, processedAuth);
     }
 
