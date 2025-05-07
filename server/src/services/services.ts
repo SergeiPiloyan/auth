@@ -1,5 +1,5 @@
 import { DB } from '../database/DB';
-import { pgs } from '../helpers/utils';
+import { hashedPassword, pgs } from '../helpers/utils';
 
 export class Service {
     private static successAuth = async (user_id: number) => {
@@ -33,7 +33,7 @@ export class Service {
         } else {
             await DB.execSelect(`
                 INSERT INTO users (user_name, password)
-                VALUES (${pgs(userName)}, ${pgs(password)})
+                VALUES (${pgs(userName)}, ${pgs(hashedPassword(password))})
             `);
 
             return {
@@ -51,7 +51,7 @@ export class Service {
         `)
         ).rows[0];
 
-        if (String(user?.password) === password) {
+        if (user && user.password === hashedPassword(password)) {
             return await Service.successAuth(user.user_id);
         }
 

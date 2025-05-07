@@ -6,3 +6,5 @@ export const ALLOWED_ORIGINS = [
 ];
 
 export const CORS_MAX_AGE = 86400000 * 100;
+
+export const PASSWORD_HASH_SALT = 'qR@%(:><:)t^9#';
