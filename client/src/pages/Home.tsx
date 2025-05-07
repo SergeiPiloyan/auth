@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { useAuth } from '../auth';
+import { useAuth } from '../auth/useAuth';
 
 export const Home = () => {
     const { logout } = useAuth();

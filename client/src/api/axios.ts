@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import toast from 'react-hot-toast';
-import { COOKIE_TOKEN, TECH_ERROR } from './utils/const';
+import { COOKIE_TOKEN, TECH_ERROR } from '../utils/const';
 
-const axiosInstance = axios.create({ baseURL: import.meta.env.VITE_APP_API_URL });
+export const axiosInstance = axios.create({ baseURL: import.meta.env.VITE_APP_API_URL });
 
 axiosInstance.interceptors.response.use(
     (response) => {
@@ -22,9 +22,3 @@ axiosInstance.interceptors.request.use((req) => {
 
     return req;
 });
-
-export const apiPostReq = async (resource: string, body = {}) => {
-    const rs = await axiosInstance.post(resource, body);
-
-    return rs.data?.data;
-};

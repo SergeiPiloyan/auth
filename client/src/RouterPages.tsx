@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Auth } from './pages/Auth';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { useAuth } from './auth';
+import { useAuth } from './auth/useAuth';
 
 export const RouterPages = () => {
     const { checkAuth, isAuthChecked } = useAuth();

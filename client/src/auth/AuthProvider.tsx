@@ -1,21 +1,9 @@
-import { createContext, RefObject, useContext, useRef, useState } from 'react';
-import { COOKIE_TOKEN } from './utils/const';
+import { COOKIE_TOKEN } from '.././utils/const';
 import { useNavigate } from 'react-router-dom';
-import { apiPostReq } from './api';
+import { apiPostReq } from '../api/api';
+import { useRef, useState } from 'react';
+import { AuthContext } from './AuthContext';
 import Cookies from 'js-cookie';
-
-type TAuthContext = {
-    isAuth: boolean;
-    isAuthChecked: RefObject<boolean | null>;
-    checkAuth: (forceCheck?: boolean) => Promise<void>;
-    login: (data: { user_name: string; password: string }) => Promise<void>;
-    logout: () => Promise<void>;
-    registration: (data: { user_name: string; password: string }) => Promise<void>;
-};
-
-const AuthContext = createContext<TAuthContext>({} as TAuthContext);
-
-export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuth, setIsAuth] = useState(false);

@@ -3,7 +3,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { PasswordInput } from '../components/PasswordInput';
 import { UsernameInput } from '../components/UsernameInput';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth';
+import { useAuth } from '../auth/useAuth';
 
 type TInputs = { user_name: string; password: string };
 
