@@ -1,9 +1,8 @@
 import { Box, Typography, Stack, Button } from '@mui/material';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { PasswordInput } from '../components/PasswordInput';
-import { UsernameInput } from '../components/UsernameInput';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/useAuth';
+import { Input } from '../components/Input';
 
 type TInputs = { user_name: string; password: string };
 
@@ -47,8 +46,8 @@ export const Auth = (props: { isLogin: boolean }) => {
                 <FormProvider {...form}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Stack spacing={3}>
-                            <UsernameInput />
-                            <PasswordInput />
+                            <Input label='User Name' name='user_name' />
+                            <Input label='Password' name='password' isPassword />
                             <Button
                                 disabled={disableButton()}
                                 type='submit'
