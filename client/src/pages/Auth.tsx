@@ -14,7 +14,7 @@ export const Auth = (props: { isLogin: boolean }) => {
     const { login, registration } = useAuth();
     const form = useForm({ defaultValues: { user_name: '', password: '' } });
 
-    const { handleSubmit } = form;
+    const { handleSubmit, watch } = form;
 
     const handleRegisterRedirect = () => {
         navigate(isLogin ? '/registration' : '/login');
@@ -29,6 +29,14 @@ export const Auth = (props: { isLogin: boolean }) => {
         }
     };
 
+    const disableButton = (): boolean => {
+        if (watch().user_name && watch().password) {
+            return false;
+        }
+
+        return true;
+    };
+
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Box>
@@ -41,7 +49,12 @@ export const Auth = (props: { isLogin: boolean }) => {
                         <Stack spacing={3}>
                             <UsernameInput />
                             <PasswordInput />
-                            <Button type='submit' variant='contained' sx={{ my: 2 }}>
+                            <Button
+                                disabled={disableButton()}
+                                type='submit'
+                                variant='contained'
+                                sx={{ my: 2 }}
+                            >
                                 {isLogin ? 'Log in' : 'Sign Up'}
                             </Button>
                             <Button onClick={handleRegisterRedirect} sx={{ my: 2 }}>
